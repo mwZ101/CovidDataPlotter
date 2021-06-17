@@ -58,9 +58,6 @@ df_tested = relevant_df.assign(Tested = data["numtested"])
 df_recovered = relevant_df.assign(Recovered_Cases = data["numrecover"])
 df_deaths = relevant_df.assign(Deaths = data["numdeaths"])
 
-print(df_totalCases.head()) #remove later
-print("At the end.\n") #remove later 
-
 #Getting info for the selected province/territory
 df_selected_total = df_totalCases[df_totalCases["prname"] == provinces[selected_index]]
 df_selected_confirmed = df_confirmedCases[df_confirmedCases["prname"] == provinces[selected_index]]
@@ -72,17 +69,17 @@ df_selected_tested = df_tested[df_activeCases["prname"] == provinces[selected_in
 df_selected_recovered = df_recovered[df_recovered["prname"] == provinces[selected_index]]
 df_selected_deaths = df_deaths[df_deaths["prname"] == provinces[selected_index]] 
 
-print(df_selected_total.head()) #remove later
-print(df_selected_confirmed.head()) #remove later
-print(df_selected_newcases.head()) #remove later
-print(df_selected_active.head()) #remove later
-print(df_selected_tested.head()) #remove later
-print(df_selected_recovered.head()) #remove later
-print(df_selected_deaths.head()) #remove later
+# print(df_selected_total.head()) #remove later
+# print(df_selected_confirmed.head()) #remove later
+# print(df_selected_newcases.head()) #remove later
+# print(df_selected_active.head()) #remove later
+# print(df_selected_tested.head()) #remove later
+# print(df_selected_recovered.head()) #remove later
+# print(df_selected_deaths.head()) #remove later
 
 #Plot 1: Total number of cases
-# x = np.linspace() 
-# y = 
+x = np.linspace(0, 100, 100) #modify this later 
+y = df_selected_total["Total_Cases"]
 
 timeOfProgram = time.time() - startTime #remove later
 print("\nTime of Program: " + str(timeOfProgram) + "\n") #remove later
