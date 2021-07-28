@@ -9,7 +9,6 @@ import matplotlib.ticker as mticker
 from matplotlib.figure import Figure
 import pandas as pd
 
-
 """
 This function runs the dataset using the inputted province/territory string and makes the necessary plots.
 
