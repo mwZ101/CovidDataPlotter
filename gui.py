@@ -1,10 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 import plotting
-
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 NavigationToolbar2Tk)
-from matplotlib.widgets import Cursor
+
 
 """
 @purpose: Runs the GUI of the program, which contains the main home page and a page of plots.
@@ -13,6 +12,7 @@ from matplotlib.widgets import Cursor
 """
 This class creates creates a GUI window and displays the home page.
 """
+
 class mainPage(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -48,12 +48,12 @@ class mainPage(tk.Tk):
                                   font=("Calibri", 12, "bold"))
         label_provTerr.place(relx=0.5, rely=0.13, anchor="center")
 
-        province_Territory = tk.StringVar()
+        self.__province_Territory = tk.StringVar()
         provTerrList = ["Alberta", "British Columbia", "Manitoba", "New Brunswick",
                         "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia", "Nunavut",
                         "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"]
 
-        dropdown_provTerr = ttk.Combobox(self, textvariable=province_Territory, values=provTerrList, state="readonly", width=27,
+        dropdown_provTerr = ttk.Combobox(self, textvariable=self.__province_Territory, values=provTerrList, state="readonly", width=27,
                                          font=("Calibri", 12))
         dropdown_provTerr.place(relx=0.5, rely=0.2, anchor="center")
 
@@ -64,7 +64,6 @@ class mainPage(tk.Tk):
         generateBtn.place(relx=0.5, rely=0.27, anchor="center")
 
         dropdown_provTerr.bind("<<ComboboxSelected>>", genBtnState)
-        self.__userInput = province_Territory.get()
 
     """
     This method turns the current home page frame into a page of plots
@@ -75,7 +74,7 @@ class mainPage(tk.Tk):
         for i in self.winfo_children():
             i.destroy()
 
-        self.__frame = plotPage(self, rootWindow=self, style=self.__style, provTerrString=self.__userInput)
+        self.__frame = plotPage(self, rootWindow=self, style=self.__style, provTerrString=self.__province_Territory.get())
 
 
 """
@@ -159,7 +158,8 @@ class plotPage(tk.Frame):
         self.__book.add(numDeathsTab, text="Death Count")
 
         for i in listOfTabs:
-            tk.Label(i, bg="black", fg="white", text="Loading Plot...", font=("Calibri, 14")).place(relx=0.5, rely=0.5, anchor="center")
+            loadingLabel = tk.Label(i, bg="black", fg="white", text="Loading Plot...", font=("Calibri, 14"))
+            loadingLabel.place(relx=0.5, rely=0.5, anchor="center")
 
         self.__window.protocol("WM_DELETE_WINDOW", self.closeProtocol)
         self.addPlots(listOfTabs)
