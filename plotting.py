@@ -63,8 +63,10 @@ def runPlots(provTerrName):
     df_selected_recovered = df_recovered[df_recovered["prname"] == provinces[selected_index]].reset_index()
     df_selected_deaths = df_deaths[df_deaths["prname"] == provinces[selected_index]].reset_index()
 
-    print("Creating plots...\n")
+    # There are some empty/missing values in the dataset, so they are being excluded in the plot
+    df_selected_recovered = df_selected_recovered.dropna()
 
+    print("Creating plots...\n")
 
     # Making all the relevant plots by passing the needed info into a function, and then adding into a list of figures
 
